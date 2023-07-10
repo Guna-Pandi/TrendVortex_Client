@@ -46,7 +46,7 @@ const Footer = () => {
       <div className=" flex items-center justify-between mt-12">
         {/* left */}
         <div className=" flex items-center">
-          <span className=" text-blue-400 font-bold text-xl">TREND VORTEX</span>
+          <span className=" text-teal-400 font-bold text-xl">TREND VORTEX</span>
           <span className=" text-gray-500 ml-6 text-base">
             © Copyright 2023. All Rights Reserved
           </span>

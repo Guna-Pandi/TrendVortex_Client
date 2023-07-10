@@ -34,12 +34,42 @@
 // };
 
 // export default Card;
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
 
-const Card = () => {
+const Card = ({ item }) => {
   return (
-    <div className='card'>Card</div>
-  )
-}
+    <Link className=" w-[300px] flex flex-col gap-3" to={`/product/${item.id}`}>
+      <div className=" card">
+        <div className="w-full h-[400px] overflow-hidden relative group">
+          {item.isNew && (
+            <span className=" absolute top-1 left-1 text-teal-500 px-[5px] py-1 z-[3] bg-slate-200 text-xs font-medium">
+              {" "}
+              New Season
+            </span>
+          )}
+          <img
+            src={item.img}
+            alt=""
+            className="w-full h-full object-cover absolute transition-opacity duration-300"
+          />
+          <img
+            src={item.img2}
+            alt=""
+            className="w-full h-full object-cover absolute opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          />
+        </div>
 
-export default Card
+        <h2 className=" text-base font-normal">{item.title}</h2>
+        <div className=" flex gap-5">
+          <h3 className=" text-lg font-medium text-gray-400 line-through">
+            ${item.oldPrice}
+          </h3>
+          <h3 className=" text-lg font-medium ">${item.price}</h3>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export default Card;
