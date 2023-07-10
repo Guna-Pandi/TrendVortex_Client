@@ -39,8 +39,8 @@ import { Link } from "react-router-dom";
 
 const Card = ({ item }) => {
   return (
-    <Link className=" w-[300px] flex flex-col gap-3" to={`/product/${item.id}`}>
-      <div className=" card">
+    <Link to={`/product/${item.id}`}>
+      <div className=" w-[220px] flex flex-col gap-3">
         <div className="w-full h-[400px] overflow-hidden relative group">
           {item.isNew && (
             <span className=" absolute top-1 left-1 text-teal-500 px-[5px] py-1 z-[3] bg-slate-200 text-xs font-medium">
