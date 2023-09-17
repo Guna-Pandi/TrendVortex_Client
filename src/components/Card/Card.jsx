@@ -40,7 +40,7 @@ import { Link } from "react-router-dom";
 const Card = ({ item }) => {
   return (
     <Link to={`/product/${item.id}`}>
-      <div className=" w-[220px] flex flex-col gap-3">
+      <div className=" w-[220px] flex flex-col gap-3 mb-12 mr-1">
         <div className="w-full h-[400px] overflow-hidden relative group">
           {item.isNew && (
             <span className=" absolute top-1 left-1 text-teal-500 px-[5px] py-1 z-[3] bg-slate-200 text-xs font-medium">

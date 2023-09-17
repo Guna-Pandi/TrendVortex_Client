@@ -1,57 +1,96 @@
-import React from "react";
-import List from './../../components/List/List';
+import React, { useState } from "react";
+import List from "./../../components/List/List";
+import { useParams } from "react-router-dom";
 
 const Products = () => {
+  const catId = parseInt(useParams().id);
+  const [maxPrice, setMaxPrice] = useState(1000);
+  const [sort, setSort] = useState(null);
+
   return (
     // products
-    <div className="">
+    <div className=" pr-6 pl-10 flex ">
       {/* left */}
-      <div>
+      <div className=" basis-1/4 sticky h-full top-10">
         {/* filter item */}
-        <div>
-          <h2>Product Categories</h2>
+        <div className=" mb-7">
+          <h2 className=" text-lg font-semibold mb-5">Product Categories</h2>
           <div>
-            <input type="checkbox" value={1} id="1" />
-            <label htmlFor="1">Shoes</label>
+            <input type="checkbox" value={1} id="1" className=" mb-2" />
+            <label htmlFor="1" className="ml-2">
+              Shoes
+            </label>
           </div>
           <div>
-            <input type="checkbox" value={2} id="2" />
-            <label htmlFor="2">Skirts</label>
+            <input type="checkbox" value={2} id="2" className=" mb-2" />
+            <label htmlFor="2" className="ml-2">
+              Skirts
+            </label>
           </div>
           <div>
-            <input type="checkbox" value={3} id="3" />
-            <label htmlFor="3">Coats</label>
+            <input type="checkbox" value={3} id="3" className=" mb-2" />
+            <label htmlFor="3" className="ml-2">
+              Coats
+            </label>
           </div>
         </div>
 
         {/* Filter by price */}
-        <div>
-          <h2>Filter by price</h2>
+        <div className=" mb-7">
+          <h2 className=" text-lg font-semibold mb-5">Filter by price</h2>
           <div>
             <span>0</span>
-            <input type="range" min={0} max={1000} />
-            <span>1000</span>
+            <input
+              type="range"
+              min={0}
+              max={1000}
+              onChange={(e) => setMaxPrice(e.target.value)}
+              className=" mb-2"
+            />
+            <span>{maxPrice}</span>
           </div>
         </div>
 
         {/* sort by price */}
-        <div>
-          <h2>Sort by price</h2>
+        <div className=" mb-7">
+          <h2 className=" text-lg font-semibold mb-5">Sort by price</h2>
           <div>
-            <input type="radio" id="asc" value="asc" name="price" />
-            <label htmlFor="asc">Price(Lowest First)</label>
+            <input
+              type="radio"
+              id="asc"
+              value="asc"
+              name="price"
+              onChange={(e) => setSort("asc")}
+              className=" mb-2"
+            />
+            <label htmlFor="asc" className="ml-2">
+              Price(Lowest First)
+            </label>
           </div>
           <div>
-            <input type="radio" id="asc" value="asc" name="price" />
-            <label htmlFor="asc">Price(Highest First)</label>
+            <input
+              type="radio"
+              id="dec"
+              value="dec"
+              name="price"
+              onChange={(e) => setSort("dec")}
+              className=" mb-2"
+            />
+            <label htmlFor="dec" className="ml-2">
+              Price(Highest First)
+            </label>
           </div>
         </div>
       </div>
 
       {/* right */}
-      <div>
-        <img src="https://images.unsplash.com/photo-1682687219356-e820ca126c92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="" />
-        <List/>
+      <div className=" basis-3/4">
+        <img
+          src="https://images.unsplash.com/photo-1682687219356-e820ca126c92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+          alt=""
+          className=" w-full h-[400px] object-cover mb-10"
+        />
+        <List catId={catId} maxPrice={maxPrice} sort={sort} />
       </div>
     </div>
   );
