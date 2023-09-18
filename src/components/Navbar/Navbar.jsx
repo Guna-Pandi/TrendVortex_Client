@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import Cart from "../Cart/Cart";
 
 const Navbar = () => {
+  const [open,setOpen] = useState(false);
   return (
     // Navbar
     <div className=" h-20">
@@ -70,7 +72,7 @@ const Navbar = () => {
             <SearchIcon />
             <PersonOutlineIcon />
             <FavoriteBorderOutlinedIcon />
-            <div className=" ">
+            <div className=" " onClick={()=>setOpen(!open)}>
               <ShoppingCartOutlinedIcon />
               <span className=" text-3 h-5 w-5 rounded-[50%] bg-blue-400 text-white absolute -right-3 -top-3 flex items-center justify-center">
                 0
@@ -79,6 +81,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      {open && <Cart/>}
     </div>
   );
 };
