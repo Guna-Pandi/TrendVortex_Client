@@ -1,12 +1,28 @@
 import React, { useState } from "react";
 import List from "./../../components/List/List";
 import { useParams } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 
 const Products = () => {
   const catId = parseInt(useParams().id);
   const [maxPrice, setMaxPrice] = useState(1000);
   const [sort, setSort] = useState(null);
+  const [selectedSubCats, setSelectedSubCats] = useState([]);
 
+  const { data, loading, error } = useFetch(
+    `/subcategories?[filters][categories][id][$eq]=${catId}`
+  );
+  console.log(data);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    const isChecked = e.target.checked;
+    setSelectedSubCats(
+      isChecked
+        ? [...selectedSubCats, value]
+        : selectedSubCats.filter((item) => item !== value)
+    );
+  };
+  console.log(selectedSubCats);
   return (
     // products
     <div className=" pr-6 pl-10 flex ">
@@ -15,24 +31,21 @@ const Products = () => {
         {/* filter item */}
         <div className=" mb-7">
           <h2 className=" text-lg font-semibold mb-5">Product Categories</h2>
-          <div>
-            <input type="checkbox" value={1} id="1" className=" mb-2" />
-            <label htmlFor="1" className="ml-2">
-              Shoes
-            </label>
-          </div>
-          <div>
-            <input type="checkbox" value={2} id="2" className=" mb-2" />
-            <label htmlFor="2" className="ml-2">
-              Skirts
-            </label>
-          </div>
-          <div>
-            <input type="checkbox" value={3} id="3" className=" mb-2" />
-            <label htmlFor="3" className="ml-2">
-              Coats
-            </label>
-          </div>
+
+          {data?.map((item) => (
+            <div key={item.id}>
+              <input
+                type="checkbox"
+                value={item.id}
+                id={item.id}
+                onChange={handleChange}
+                className=" mb-2"
+              />
+              <label htmlFor={item.id} className="ml-2">
+                {item.attributes.title}
+              </label>
+            </div>
+          ))}
         </div>
 
         {/* Filter by price */}
@@ -90,7 +103,7 @@ const Products = () => {
           alt=""
           className=" w-full h-[400px] object-cover mb-10"
         />
-        <List catId={catId} maxPrice={maxPrice} sort={sort} />
+        <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
       </div>
     </div>
   );
