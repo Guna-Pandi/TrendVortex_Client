@@ -31,7 +31,6 @@ const Products = () => {
         {/* filter item */}
         <div className=" mb-7">
           <h2 className=" text-lg font-semibold mb-5">Product Categories</h2>
-
           {data?.map((item) => (
             <div key={item.id}>
               <input
@@ -103,7 +102,12 @@ const Products = () => {
           alt=""
           className=" w-full h-[400px] object-cover mb-10"
         />
-        <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
+        <List
+          catId={catId}
+          maxPrice={maxPrice}
+          sort={sort}
+          subCats={selectedSubCats}
+        />
       </div>
     </div>
   );
